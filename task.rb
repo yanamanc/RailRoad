@@ -1,6 +1,6 @@
 class Station
 
-  attr_accessor :trains
+  attr_accessor :trains, :name
 
   def initialize(name)
     @name = name
@@ -45,14 +45,14 @@ class Route
 attr_accessor :way_station
 
   def initialize(start_station, final_station)
-    @start_station = start_station
-    @final_station = final_station
-    @way_station = [start_station , final_station]
+    @start_station = start_station.name
+    @final_station = final_station.name
+    @way_station = [start_station.name, final_station.name]
   end
 
-  def add_station(station_name)
-  	@way_station.insert(-2, station_name)
-  	print "A new station #{station_name} added"
+  def add_station(station)
+  	@way_station.insert(-2, station.name)
+  	print "A new station #{station.name} added"
   end
 
   def delete_station
@@ -82,9 +82,10 @@ class Train
 
   def change_carriage_amount
     if @speed == 0
-      print "Inter amount of carriage you want to add (if you want to unhooked carriages inter amount with symbol -): "
-      count = gets.chomp.to_i
-      @carriage_amount +=count
+      print "Inter + if you want to add carriage and -if you want to unhooked carriages: "
+      count = gets.chomp
+      @carriage_amount += 1 if count == "+"
+      @carriage_amount -= 1 if count == "-"
     end
   end
 
