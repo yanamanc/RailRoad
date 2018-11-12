@@ -1,6 +1,6 @@
 class Route
 
-  attr_accessor :stations
+attr_accessor :stations
 
   def initialize(start_station, final_station)
     @stations = [start_station, final_station]
@@ -8,6 +8,7 @@ class Route
 
   def add_station(station)
     @stations.insert(-2, station)
+    print "A new station #{station.name} added"
   end
 
   def delete_station(station)
