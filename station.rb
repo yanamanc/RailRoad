@@ -9,18 +9,11 @@ class Station
 
   def add_train(train)
     @trains << train
-    train.current_station = @name
-    print "A new #{@trains.last.type} train nomber #{@trains.last.nomber} arrived at the station."
-  end
-
-  def trains_list
-    @trains.each {|train|
-      "#{train.type}, #{train.nomber}"
-    }
+    train.current_station = self
   end
 
   def trains_list_by_type(type)
-    @trains.each { |train|
+    @trains.select { |train|
       train.nomber if train.type == type
     }
   end

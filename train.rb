@@ -23,7 +23,7 @@ class Train
   end
 
   def sub_carriage
-    @carriage_amount -= 1 if @speed == 0
+    @carriage_amount -= 1 if (@speed == 0) & (@carriage_amount != 0)
   end
 
   def add_route(route)
@@ -32,28 +32,20 @@ class Train
   end
 
   def move_to_next_station
-    if @current_station == @all_stations[-1]
-      print "There no station"
-    else
-      @current_station = @all_stations[@all_stations.index(@current_station) + 1]
-    end
+    @current_station = @all_stations[@all_stations.index(@current_station) + 1] if @current_station != @all_stations[-1]
   end
 
   def move_to_previous_station
-    if @current_station == @all_stations[0] 
-      print "There no station"
-    else
-      @current_station = @all_stations[@all_stations.index(@current_station) - 1]
-    end
+    @current_station = @all_stations[@all_stations.index(@current_station) - 1] if @current_station != @all_stations[0] 
   end
 
   def return_near_station
     if @current_station == @all_stations[0]
-      "#{@all_stations[0]}, #{@all_stations[1]}"
+      return @all_stations[0], @all_stations[1]
     elsif @current_station == @all_stations[-1]
-       "#{@all_stations[-2]}, #{@all_stations[-1]}"
+      return @all_stations[-2], @all_stations[-1]
     else
-      "#{@all_stations[@all_stations.index(@current_station) - 1]}, #{@current_station}, #{@all_stations[@all_stations.index(@current_station) + 1]}"
+      return @all_stations[@all_stations.index(@current_station) - 1], @current_station, @all_stations[@all_stations.index(@current_station) + 1]
     end
   end
 
