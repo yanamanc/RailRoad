@@ -1,19 +1,15 @@
 class Passanger_carriage
 
-  attr_reader :type
-
   def initialize
-  	@type = "passanger"
+    @type = "passanger"
   end
 
 end
 
 class Cargo_carriage
 
-  attr_reader :type
-
   def initialize
-  	@type = "cargo"
+    @type = "cargo"
   end
 
 end
