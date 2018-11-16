@@ -1,5 +1,7 @@
 class Passanger_carriage
 
+  include Firm
+
   def initialize
     @type = "passanger"
   end
@@ -7,6 +9,8 @@ class Passanger_carriage
 end
 
 class Cargo_carriage
+
+  include Firm
 
   def initialize
     @type = "cargo"

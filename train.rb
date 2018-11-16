@@ -1,9 +1,20 @@
 class Train
 
-  attr_accessor :current_station
+  attr_accessor :current_station, :trains
   attr_reader :all_stations
+  include Firm
 
-    def add_carriage(carriage)
+  @@array = []
+
+  def self.all_instances
+    @@array
+  end
+
+  def self.find(nomber)
+    @@array.select{ |train| train.nomber == nomber}
+  end
+
+  def add_carriage(carriage)
     @carriages << carriage if @speed == 0 && self.type == carriage.type
   end
 

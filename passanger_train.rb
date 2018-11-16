@@ -1,12 +1,14 @@
 class PassangerTrain < Train
 
-  attr_accessor :carriages, :type, :speed
+  attr_accessor :type, :speed, :nomber
+  extend InstanceCounter
 
-  def initialize(number)
+  def initialize(nomber)
     @speed = 0
     @type = "passanger"
-    @number = number
-    @carriages = []
+    @nomber = nomber
+    @@array << self
+    self.register_instance
   end
 
 end
