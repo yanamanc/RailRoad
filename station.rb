@@ -1,9 +1,10 @@
 class Station
 
   attr_accessor :trains, :name
-  extend InstanceCounter
+  include InstanceCounter
 
   @@all = []
+  @@instances = 0
 
   def self.all
     @@all
@@ -13,7 +14,7 @@ class Station
     @name = name
     @trains = []
     @@all << self
-    self.register_instance
+    @@instances = register_instance(@@instances)
   end
 
   def add_train(train)

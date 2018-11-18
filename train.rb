@@ -1,6 +1,6 @@
 class Train
 
-  attr_accessor :current_station, :trains
+  attr_accessor :current_station
   attr_reader :all_stations
   include Firm
 
@@ -10,8 +10,8 @@ class Train
     @@array
   end
 
-  def self.find(nomber)
-    @@array.select{ |train| train.nomber == nomber}
+  def self.find(number)
+    @@array.select{ |train| train.number == number}
   end
 
   def add_carriage(carriage)

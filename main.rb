@@ -6,6 +6,8 @@ require_relative 'passanger_train.rb'
 require_relative 'cargo_carriage.rb'
 require_relative 'passanger_carriage.rb'
 require_relative 'railway.rb'
+require_relative 'firm.rb'
+require_relative 'instance_counter.rb'
 
 rail_way = Railway.new
 rail_way.menu

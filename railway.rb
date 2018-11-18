@@ -42,13 +42,13 @@ class Railway
 
         case choose
           when 1
-            puts "input nomber"
-            nomber = gets.chomp.to_i
-            @passanger_trains << PassangerTrain.new(nomber)
+            puts "input number"
+            number = gets.chomp.to_i
+            @passanger_trains << PassangerTrain.new(number)
           when 2
-            puts "input nomber"
-            nomber = gets.chomp.to_i
-            @cargo_trains << CargoTrain.new(nomber)
+            puts "input number"
+            number = gets.chomp.to_i
+            @cargo_trains << CargoTrain.new(number)
           end
 
       when 2
