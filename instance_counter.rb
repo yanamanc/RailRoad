@@ -1,21 +1,23 @@
 module InstanceCounter
+
   def self.included(base)
     base.extend ClassMethods
     base.send :include, InstanceMethods
   end
 
-  $count = 0
-
   module ClassMethods
-    def instances
-      $count
-    end
+  attr_accessor :instances
+  
+  def counter
+    @instances ||= 0
+    @instances += 1
+  end 
   end
 
   module InstanceMethods
-    def register_instance(instances)
-    	instances += 1
-    	$count = instances
+    extend ClassMethods
+    def register_instance
+      self.class.send :counter
     end
   end
 

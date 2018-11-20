@@ -3,11 +3,9 @@ class Route
   attr_accessor :stations
   include InstanceCounter
 
-  @@instances = 0
-
   def initialize(start_station, final_station)
     @stations = [start_station, final_station]
-    @@instances = register_instance(@@instances)
+    register_instance
 
   end
 
