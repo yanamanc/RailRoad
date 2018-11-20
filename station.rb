@@ -4,7 +4,6 @@ class Station
   include InstanceCounter
 
   @@all = []
-  @@instances = 0
 
   def self.all
     @@all
@@ -14,7 +13,7 @@ class Station
     @name = name
     @trains = []
     @@all << self
-    @@instances = register_instance(@@instances)
+    register_instance
   end
 
   def add_train(train)
