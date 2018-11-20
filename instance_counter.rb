@@ -12,11 +12,6 @@ module InstanceCounter
       @instances ||= 0
       @instances += 1
     end 
-    
-    def counter
-      @instances ||= 0
-      @instances += 1
-    end 
   end
 
   module InstanceMethods
