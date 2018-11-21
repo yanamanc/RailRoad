@@ -11,4 +11,3 @@ require_relative 'railway.rb'
 
 rail_way = Railway.new
 rail_way.menu
-

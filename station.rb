@@ -1,7 +1,10 @@
 class Station
 
-  attr_accessor :trains, :name
+  attr_accessor :trains
+  attr_reader :name
   include InstanceCounter
+
+  STATION_NAME_FORMAT = /^[a-z]$/i
 
   @@all = []
 
@@ -14,6 +17,7 @@ class Station
     @trains = []
     @@all << self
     register_instance
+    validate?
   end
 
   def add_train(train)
@@ -27,6 +31,13 @@ class Station
 
   def send_train(train)
     @trains.delete(train)
+  end
+
+  private
+
+  def validate?
+    raise "Name of station must contain only leters" if name !~ STATION_NAME_FORMAT
+    true
   end
 
 end
