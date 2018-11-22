@@ -55,9 +55,12 @@ class Train
 
   protected
 
-  def validate?
-    raise "Number is not corrent" if number !~ NUMBER_FORMAT
-    true
+  def validate!
+    raise "Number is not corrent" if self.valid? == false
+  end
+
+  def valid?
+    false if number !~ NUMBER_FORMAT
   end
 
 end

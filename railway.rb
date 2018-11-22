@@ -39,7 +39,6 @@ class Railway
         puts "1 - passanger train"
         puts "2 - cargo train"
         choose1 = gets.chomp.to_i
-        bollian = true
 
         case choose
           when 1
@@ -50,7 +49,7 @@ class Railway
             yield if block_given?
             rescue
               puts "Number format is not correct"
-              retry if bollian == true
+              retry
             else
             puts "Passanger train number #{number} was created" if number =~ /^[a-z0-9]{3}[-]{0,1}[a-z0-9]{2}$/i
             end
@@ -62,7 +61,7 @@ class Railway
               yield if block_given?
                 rescue
                 puts "Number format is not correct"
-                retry if bollian == true
+                retry
               else
                 puts "Cargo train number #{number} was created" if number =~ /^[a-z]$/i
             end
