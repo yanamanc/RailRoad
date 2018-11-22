@@ -56,11 +56,11 @@ class Train
   protected
 
   def validate!
-    raise "Number is not corrent" if self.valid? == false
+    false if number !~ NUMBER_FORMAT
   end
 
   def valid?
-    false if number !~ NUMBER_FORMAT
+    raise "Wrong number format" if validate! == false
   end
 
 end

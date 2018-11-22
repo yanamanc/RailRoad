@@ -43,27 +43,25 @@ class Railway
         case choose
           when 1
             begin
-            puts "input number"
-            number = gets.chomp
-            @passanger_trains << PassangerTrain.new(number)
-            yield if block_given?
-            rescue
-              puts "Number format is not correct"
+              puts "input number"
+              number = gets.chomp
+              @passanger_trains << PassangerTrain.new(number)
+              rescue
+              raise 
               retry
-            else
-            puts "Passanger train number #{number} was created" if number =~ /^[a-z0-9]{3}[-]{0,1}[a-z0-9]{2}$/i
+              else
+            puts "Passanger train number #{number} was created"
             end
           when 2
             begin
               puts "input number"
               number = gets.chomp.to_i
               @cargo_trains << CargoTrain.new(number)
-              yield if block_given?
-                rescue
-                puts "Number format is not correct"
-                retry
+              rescue
+              raise
+              retry
               else
-                puts "Cargo train number #{number} was created" if number =~ /^[a-z]$/i
+              puts "Cargo train number #{number} was created"
             end
           end
 
@@ -72,12 +70,11 @@ class Railway
         puts "Inter name of Station"
         name = gets.chomp
         @allstations << Station.new(name)
-        yield if block_given?
-          rescue
-          puts "Number format is not correct"
-          retry if bollian == true
-          else
-          puts "Cargo train number #{number} was created" if number =~ /^[a-z0-9]{3}[-]{0,1}[a-z0-9]{2}$/i
+        rescue
+        raise
+        retry
+        else
+        puts "Station was created"
         end
 
       when 3
