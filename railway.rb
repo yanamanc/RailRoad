@@ -42,7 +42,6 @@ class Railway
         begin
         case choose
           when 1
-            begin
               puts "input number"
               number = gets.chomp
               @passanger_trains << PassangerTrain.new(number)
