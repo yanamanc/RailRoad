@@ -17,7 +17,7 @@ class Station
     @trains = []
     @@all << self
     register_instance
-    valid?
+    validate!
   end
 
   def add_train(train)
@@ -33,14 +33,17 @@ class Station
     @trains.delete(train)
   end
 
+  def valid?
+    validate!
+    rescue RuntimeError
+    false
+  end
+
   private
 
   def validate!
-    false if name !~ STATION_NAME_FORMAT
-  end
-
-  def valid?
-    raise "Name of station must contain only leters" if validate! == false
+    raise "Name of station must contain only leters" if name !~ STATION_NAME_FORMAT
+    true
   end
 
 end

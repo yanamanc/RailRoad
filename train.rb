@@ -53,14 +53,17 @@ class Train
     @current_station = self.previous_station
   end
 
+  def valid?
+    validate!
+    rescue RuntimeError
+    false
+  end
+
   protected
 
   def validate!
-    false if number !~ NUMBER_FORMAT
-  end
-
-  def valid?
-    raise "Wrong number format" if validate! == false
+    raise "Number is not corrent" if number !~ NUMBER_FORMAT
+    true
   end
 
 end

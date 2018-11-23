@@ -39,30 +39,24 @@ class Railway
         puts "1 - passanger train"
         puts "2 - cargo train"
         choose1 = gets.chomp.to_i
-
+        begin
         case choose
           when 1
             begin
               puts "input number"
               number = gets.chomp
               @passanger_trains << PassangerTrain.new(number)
-              rescue
-              raise 
-              retry
-              else
-            puts "Passanger train number #{number} was created"
+              puts "Passanger train number #{number} was created"
             end
           when 2
-            begin
               puts "input number"
               number = gets.chomp.to_i
               @cargo_trains << CargoTrain.new(number)
-              rescue
-              raise
-              retry
-              else
               puts "Cargo train number #{number} was created"
             end
+          rescue RuntimeError => e
+          puts e.message
+          retry
           end
 
       when 2

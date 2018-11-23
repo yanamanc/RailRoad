@@ -9,7 +9,7 @@ class CargoTrain < Train
     @number = number
     @@array << self
     register_instance
-    valid?
+    validate
   end
 
 end
