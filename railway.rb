@@ -46,7 +46,6 @@ class Railway
               number = gets.chomp
               @passanger_trains << PassangerTrain.new(number)
               puts "Passanger train number #{number} was created"
-            end
           when 2
               puts "input number"
               number = gets.chomp.to_i
@@ -63,13 +62,10 @@ class Railway
         puts "Inter name of Station"
         name = gets.chomp
         @allstations << Station.new(name)
-        rescue
-        raise
+        rescue RuntimeError => e
+        puts e.message
         retry
-        else
-        puts "Station was created"
         end
-
       when 3
         puts "Inter name of first and last station"
         first_station = gets.chomp

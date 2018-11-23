@@ -3,6 +3,7 @@ class Station
   attr_accessor :trains
   attr_reader :name
   include InstanceCounter
+  include Valid
 
   STATION_NAME_FORMAT = /^[a-z]+$/i
 
@@ -31,12 +32,6 @@ class Station
 
   def send_train(train)
     @trains.delete(train)
-  end
-
-  def valid?
-    validate!
-    rescue RuntimeError
-    false
   end
 
   private

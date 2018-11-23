@@ -3,6 +3,7 @@ class Train
   attr_accessor :current_station
   attr_reader :all_stations
   include Firm
+  include Valid
 
   NUMBER_FORMAT = /^[a-z0-9]{3}[-]{0,1}[a-z0-9]{2}$/i
 
@@ -51,12 +52,6 @@ class Train
 
   def move_to_previous_station
     @current_station = self.previous_station
-  end
-
-  def valid?
-    validate!
-    rescue RuntimeError
-    false
   end
 
   protected
