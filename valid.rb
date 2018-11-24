@@ -2,7 +2,7 @@ module Valid
 
   def valid?
     validate!
-    rescue RuntimeError
+  rescue RuntimeError
     false
   end
 
