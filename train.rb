@@ -21,8 +21,8 @@ class Train
     @carriages << carriage if @speed == 0 && self.type == carriage.type
   end
 
-  def sub_carriage(carriage)
-    @carriages.delete(carriage) if @speed == 0
+  def sub_carriage
+    @carriages.delete_at(0) if @speed == 0
   end
 
   def speed(number)

@@ -48,7 +48,7 @@ class Railway
               puts "Passanger train number #{number} was created"
           when 2
               puts "input number"
-              number = gets.chomp.to_i
+              number = gets.chomp
               @cargo_trains << CargoTrain.new(number)
               puts "Cargo train number #{number} was created"
             end
@@ -98,7 +98,7 @@ class Railway
 
           when 1
             puts "Inter nomber of train"
-            number = gets.chomp.to_i
+            number = gets.chomp
             puts "Inter name of first station"
             first_station = gets.chomp
             puts "Inter name of last station"
@@ -108,7 +108,7 @@ class Railway
 
           when 2
             puts "Inter nomber of train"
-            number = gets.chomp.to_i
+            number = gets.chomp
             puts "Inter name of first station"
             first_station = gets.chomp
             puts "Inter name of last station"
@@ -129,7 +129,7 @@ class Railway
 
           when 2
             puts "Inter number of train"
-            number = gets.chomp.to_i
+            number = gets.chomp
             @cargo_trains.select{ |train| train.number == number }.first.add_carriage(CargoCarriage.new)
         end
 
@@ -141,12 +141,12 @@ class Railway
 
           when 1
             puts "Inter nomber of train"
-            number = gets.chomp.to_i
-            @passanger_trains.select{ |train| train.number == number }.first.sub_carriage(self.carriages.last)
+            number = gets.chomp
+            @passanger_trains.select{ |train| train.number == number }.first.sub_carriage
 
           when 2
             puts "Inter nomber of train"
-            number = gets.chomp.to_i
+            number = gets.chomp
             @cargo_trains.select{ |train| train.number == number }.first.sub_carriage(self.carriages.last)
         end
 
@@ -158,13 +158,13 @@ class Railway
 
           when 1
             puts "Inter nomber of train"
-            number = gets.chomp.to_i
+            number = gets.chomp
             train = @passanger_trains.select{ |train| train.number == number }
             train.move_to_next_station
 
           when 2
             puts "Inter nomber of train"
-            number = gets.chomp.to_i
+            number = gets.chomp
             train = @cargo_trains.select{ |train| train.number == number }
             train.move_to_next_station
         end
@@ -177,12 +177,12 @@ class Railway
 
           when 1
             puts "Inter nomber of train"
-            number = gets.chomp.to_i
+            number = gets.chomp
             @passanger_trains.select{ |train| train.number == number }.move_to_previous_station
 
           when 2
             puts "Inter nomber of train"
-            number = gets.chomp.to_i
+            number = gets.chomp
             @cargo_trains.select{ |train| train.number == number }.move_to_previous_station
         end
 
