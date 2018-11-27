@@ -1,3 +1,2 @@
 class Carriage
-  
 end

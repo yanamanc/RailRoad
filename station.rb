@@ -1,11 +1,10 @@
 class Station
-
   attr_accessor :trains
   attr_reader :name
   include InstanceCounter
   include Valid
 
-  STATION_NAME_FORMAT = /^[a-z]+$/i
+  STATION_NAME_FORMAT = /^[a-z]+$/i.freeze
 
   @@all = []
 
@@ -41,8 +40,8 @@ class Station
   private
 
   def validate!
-    raise "Name of station must contain only leters" if name !~ STATION_NAME_FORMAT
+    raise 'Name of station must contain only leters' if name !~ STATION_NAME_FORMAT
+
     true
   end
-
 end
