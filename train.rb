@@ -32,7 +32,7 @@ class Train
 
   def add_route(route)
     @all_stations = route.stations
-    @current_station = route.stations[0]
+    @current_station = route.stations[0].name
   end
 
   def stop

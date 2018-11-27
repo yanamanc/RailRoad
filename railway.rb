@@ -106,9 +106,12 @@ class Railway
         case choose
           when 1
             train = @passanger_trains.select{ |train| train.number == number }.first
-            train.add_route(@routes.select{ |route| route.stations[0].name == first_station  && route.stations[-1].name == last_station }.first)          when 2
+            train.add_route(@routes.select{ |route| route.stations[0].name == first_station  && route.stations[-1].name == last_station }.first)
+            @allstations.select{ |station| station.name == first_station }.first.trains << train
+          when 2
             train = @cargo_trains.select{ |train| train.number == number }.first
             train.add_route(@routes.select{ |route| route.stations[0].name == first_station && route.stations[-1].name == last_station }.first)
+            @allstations.select{ |station| station.name == first_station }.first.trains << train
           end
 
       when 7
@@ -177,25 +180,22 @@ class Railway
       when 12
           puts "=======Passanger trains======="
           @passanger_trains.each do |train|
-            train.carriages.each do |carriage|
-              puts "passanger carriages №#1, free seats amount: #{carriage.free_seats}, occupied seats amount: #{carriage.occupied_seats}."
+            train.carriages_list do |carriage|
+              puts "passanger carriages №#1, free seats amount: #{carriage.seats_number}, occupied seats amount: #{carriage.occupied_seats}."
             end
           end
           puts "=======Cargo trains======="
           @cargo_trains.each do |train|
-            train.carriages.each do |carriage|
-              puts "cargo carriages №#2, free volume: #{carriage.free_volume}, occupiedvolume: #{carriage.occupied_volume}."
+            train.carriages_list do |carriage|
+              puts "cargo carriages №#2, free volume: #{carriage.total_volume}, occupiedvolume: #{carriage.occupied_volume}."
             end
           end
 
       when 13
         @allstations.each do |station|
           puts "=======#{station.name}======="
-          @passanger_trains.select{ |train| train.current_station.name == station.name }.each do |train|
-          puts "#{train.type} train №#{train.number}, carriges amount:  #{train.carriages.size}."
-          end
-          @cargo_trains.select{ |train| train.current_station.name == station.name }.each do |train|
-          puts "#{train.type} train №#{train.number}, carriges amount:  #{train.carriages.size}."
+          station.trains_list do |train|
+            puts "#{train.type} train №#{train.number}, carriges amount:  #{train.carriages.size}."
           end
         end
 
@@ -205,7 +205,7 @@ class Railway
         puts "Inter volume in ur carriage"
         volume = gets.chomp.to_i
         train = @cargo_trains.select{ |train| train.number == number }.first.carriages
-        carriage = train.select{ |carriage| carriage.free_volume + carriage.occupied_volume == volume }.first
+        carriage = train.select{ |carriage| carriage.total_volume == volume }.first
         puts "Occupie volume value: "
         new_volume = gets.chomp.to_i
         carriage.take_up_volume(new_volume)
@@ -216,7 +216,7 @@ class Railway
         puts "Inter seats amount in ur carriage"
         seats = gets.chomp.to_i
         train = @passanger_trains.select{ |train| train.number == number }.first.carriages
-        carriage = train.select{ |carriage| carriage.free_seats + carriage.occupied_seats == seats }.first
+        carriage = train.select{ |carriage| carriage.seats_number == seats }.first
         carriage.take_seat
 
       end

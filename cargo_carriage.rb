@@ -1,15 +1,15 @@
 class CargoCarriage < Carriage
 
-  attr_reader :type, :free_volume, :occupied_volume
+  attr_reader :type, :total_volume, :occupied_volume
 
   def initialize(volume)
     @type = "cargo"
-    @free_volume = volume
+    @total_volume = volume
     @occupied_volume = 0
   end
 
   def take_up_volume(value)
-    @free_volume -= value && @occupied_volume += value if @free_volume > @free_volume - value
+    @occupied_volume += value if @occupied_volume + value <= @total_volume
   end
 
 end
