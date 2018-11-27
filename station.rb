@@ -34,6 +34,10 @@ class Station
     @trains.delete(train)
   end
 
+  def trains_list
+    @trains.each { |train| yield(train) }
+  end
+
   private
 
   def validate!

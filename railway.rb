@@ -26,7 +26,10 @@ class Railway
     puts "9 - Move train to next station"
     puts "10 - Move train to previous station"
     puts "11 - Stations list"
-    puts "12 - Trains list"
+    puts "12 - Show carriages list for all trains"
+    puts "13 - Show trains list gor all stations"
+    puts "14 - Occupie volume"
+    puts "15 - Occupie seats"
 
     choose = gets.chomp.to_i
 
@@ -40,22 +43,22 @@ class Railway
         puts "2 - cargo train"
         choose1 = gets.chomp.to_i
         begin
-        case choose
+        puts "input number"
+        number = gets.chomp
+        case choose1
           when 1
-              puts "input number"
-              number = gets.chomp
-              @passanger_trains << PassangerTrain.new(number)
-              puts "Passanger train number #{number} was created"
+            @passanger_trains << PassangerTrain.new(number)
+            puts "Passanger train number #{number} was created"
           when 2
-              puts "input number"
-              number = gets.chomp
-              @cargo_trains << CargoTrain.new(number)
-              puts "Cargo train number #{number} was created"
-            end
+            puts "input volume"
+            volume = gets.chomp.to_i
+            @cargo_trains << CargoTrain.new(number)
+            puts "Cargo train number #{number} was created"
+          end
           rescue RuntimeError => e
           puts e.message
           retry
-          end
+        end
 
       when 2
         begin
@@ -70,7 +73,7 @@ class Railway
         puts "Inter name of first and last station"
         first_station = gets.chomp
         last_station = gets.chomp
-        @routes << Route.new(@allstations.select{ |station| station.name == first_station}, @allstations.select{|station| station.name == last_station })
+        @routes << Route.new(@allstations.select{ |station| station.name == first_station}.first, @allstations.select{|station| station.name == last_station }.first)
 
       when 4
         puts "Inter name of first and last station"
@@ -78,8 +81,8 @@ class Railway
         last_station = gets.chomp
         puts "Inter name of station you want to add"
         station = gets.chomp
-        route = @routes.select{|route| route.stations[0] == first_station && route.stations[-1] == last_station}
-        route.stations.insert(1, @allstations.select{ |st| st.name == station })
+        route = @routes.select{|route| route.stations[0] == first_station && route.stations[-1] == last_station}.first
+        route.stations.insert(1, @allstations.select{ |st| st.name == station }.first)
 
       when 5
         puts "Inter name of first and last station"
@@ -87,85 +90,67 @@ class Railway
         last_station = gets.chomp
         puts "Inter name of station you want to delete"
         station = gets.chomp
-        route = @routes.select{ |route| route.stations[0] == first_station && route.stations[-1] == last_station }
-        route.sub_station(@allstations.select{ |station| station.name == station })
+        route = @routes.select{ |route| route.stations[0].name == first_station && route.stations[-1].name == last_station }.first
+        route.sub_station(@allstations.select{ |station| station.name == station }.first)
 
       when 6
         puts "1 - add to passanger train"
         puts "2 - add to cargo train"
         choose = gets.chomp.to_i
+        puts "Inter number of train"
+        number = gets.chomp
+        puts "Inter name of first station"
+        first_station = gets.chomp
+        puts "Inter name of last station"
+        last_station = gets.chomp
         case choose
-
           when 1
-            puts "Inter nomber of train"
-            number = gets.chomp
-            puts "Inter name of first station"
-            first_station = gets.chomp
-            puts "Inter name of last station"
-            last_station = gets.chomp
-            train = @passanger_trains.select{ |train| train.number == number }
-            train.add_route(@routes.select{ |route| route.stations[0] == first_station && route.stations[-1] == last_station })
-
-          when 2
-            puts "Inter nomber of train"
-            number = gets.chomp
-            puts "Inter name of first station"
-            first_station = gets.chomp
-            puts "Inter name of last station"
-            last_station = gets.chomp
-            train = @cargo_trains.select{ |train| train.number == number }
-            train.add_route(@routes.select{ |route| route.stations[0] == first_station && route.stations[-1] == last_station })
+            train = @passanger_trains.select{ |train| train.number == number }.first
+            train.add_route(@routes.select{ |route| route.stations[0].name == first_station  && route.stations[-1].name == last_station }.first)          when 2
+            train = @cargo_trains.select{ |train| train.number == number }.first
+            train.add_route(@routes.select{ |route| route.stations[0].name == first_station && route.stations[-1].name == last_station }.first)
           end
 
       when 7
         puts "1 - add to passanger train"
         puts "2 - add to cargo train"
         choose = gets.chomp.to_i
+        puts "Inter number of train"
+        number = gets.chomp
         case choose
           when 1
-            puts "Inter number of train"
-            number = gets.chomp
-            @passanger_trains.select{ |train| train.number == number }.first.add_carriage(PassangerCarriage.new)
-
+            puts "input seats amount"
+            seats = gets.chomp.to_i
+            @passanger_trains.select{ |train| train.number == number }.first.add_carriage(PassangerCarriage.new(seats))
           when 2
-            puts "Inter number of train"
-            number = gets.chomp
-            @cargo_trains.select{ |train| train.number == number }.first.add_carriage(CargoCarriage.new)
+            @cargo_trains.select{ |train| train.number == number }.first.add_carriage(CargoCarriage.new(seats))
         end
 
       when 8
         puts "1 - delete from passanger train"
         puts "2 - delete from cargo train"
         choose = gets.chomp.to_i
+        puts "Inter nomber of train"
+        number = gets.chomp
         case choose
-
           when 1
-            puts "Inter nomber of train"
-            number = gets.chomp
             @passanger_trains.select{ |train| train.number == number }.first.sub_carriage
-
           when 2
-            puts "Inter nomber of train"
-            number = gets.chomp
-            @cargo_trains.select{ |train| train.number == number }.first.sub_carriage(self.carriages.last)
+            @cargo_trains.select{ |train| train.number == number }.first.sub_carriage
         end
 
       when 9
         puts "1 - passanger train"
         puts "2 - cargo train"
         choose = gets.chomp.to_i
+        puts "Inter nomber of train"
+        number = gets.chomp
         case choose
-
           when 1
-            puts "Inter nomber of train"
-            number = gets.chomp
-            train = @passanger_trains.select{ |train| train.number == number }
+            train = @passanger_trains.select{ |train| train.number == number }.first
             train.move_to_next_station
-
           when 2
-            puts "Inter nomber of train"
-            number = gets.chomp
-            train = @cargo_trains.select{ |train| train.number == number }
+            train = @cargo_trains.select{ |train| train.number == number }.first
             train.move_to_next_station
         end
 
@@ -173,31 +158,66 @@ class Railway
         puts "1 - add to passanger train"
         puts "2 - add to cargo train"
         choose = gets.chomp.to_i
+        puts "Inter nomber of train"
+        number = gets.chomp
         case choose
-
           when 1
-            puts "Inter nomber of train"
-            number = gets.chomp
-            @passanger_trains.select{ |train| train.number == number }.move_to_previous_station
-
+            @passanger_trains.select{ |train| train.number == number }.first.move_to_previous_station
           when 2
-            puts "Inter nomber of train"
-            number = gets.chomp
-            @cargo_trains.select{ |train| train.number == number }.move_to_previous_station
+            @cargo_trains.select{ |train| train.number == number }.first.move_to_previous_station
         end
 
       when 11
         puts "Inter name of first and last station"
         first_station = gets.chomp
         last_station = gets.chomp
-        route = @routes.select{ |route| route.stations[0] == first_station && route.stations[-1] == last_station }
+        route = @routes.select{ |route| route.stations[0].name == first_station && route.stations[-1].name == last_station }.first
         route.stations
 
       when 12
-        puts "Inter name of station"
-        station_name = gets.chomp
-        station = @allstations.select{ |station| station.name == station_name }
-        station.trains
+          puts "=======Passanger trains======="
+          @passanger_trains.each do |train|
+            train.carriages.each do |carriage|
+              puts "passanger carriages №#1, free seats amount: #{carriage.free_seats}, occupied seats amount: #{carriage.occupied_seats}."
+            end
+          end
+          puts "=======Cargo trains======="
+          @cargo_trains.each do |train|
+            train.carriages.each do |carriage|
+              puts "cargo carriages №#2, free volume: #{carriage.free_volume}, occupiedvolume: #{carriage.occupied_volume}."
+            end
+          end
+
+      when 13
+        @allstations.each do |station|
+          puts "=======#{station.name}======="
+          @passanger_trains.select{ |train| train.current_station.name == station.name }.each do |train|
+          puts "#{train.type} train №#{train.number}, carriges amount:  #{train.carriages.size}."
+          end
+          @cargo_trains.select{ |train| train.current_station.name == station.name }.each do |train|
+          puts "#{train.type} train №#{train.number}, carriges amount:  #{train.carriages.size}."
+          end
+        end
+
+      when 14
+        puts "Inter number of cargo train"
+        number = gets.chomp
+        puts "Inter volume in ur carriage"
+        volume = gets.chomp.to_i
+        train = @cargo_trains.select{ |train| train.number == number }.first.carriages
+        carriage = train.select{ |carriage| carriage.free_volume + carriage.occupied_volume == volume }.first
+        puts "Occupie volume value: "
+        new_volume = gets.chomp.to_i
+        carriage.take_up_volume(new_volume)
+
+      when 15
+        puts "Inter number of passanger train"
+        number = gets.chomp
+        puts "Inter seats amount in ur carriage"
+        seats = gets.chomp.to_i
+        train = @passanger_trains.select{ |train| train.number == number }.first.carriages
+        carriage = train.select{ |carriage| carriage.free_seats + carriage.occupied_seats == seats }.first
+        carriage.take_seat
 
       end
     end

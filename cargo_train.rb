@@ -1,7 +1,6 @@
 class CargoTrain < Train
 
   attr_accessor :number, :type, :speed, :carriages
-  include InstanceCounter
 
   def initialize(number)
     @speed = 0
@@ -10,7 +9,7 @@ class CargoTrain < Train
     @@array << self
     @carriages = []
     register_instance
-    validate
+    validate!
   end
 
 end

@@ -1,7 +1,6 @@
 class PassangerTrain < Train
 
   attr_accessor :type, :speed, :number, :carriages
-  include InstanceCounter
 
   def initialize(number)
     @speed = 0

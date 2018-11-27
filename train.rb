@@ -4,6 +4,7 @@ class Train
   attr_reader :all_stations
   include Firm
   include Valid
+  include InstanceCounter
 
   NUMBER_FORMAT = /^[a-z0-9]{3}[-]{0,1}[a-z0-9]{2}$/i
 
@@ -52,6 +53,10 @@ class Train
 
   def move_to_previous_station
     @current_station = self.previous_station
+  end
+
+  def carriages_list
+    @carriages.each { |carriage| yield(carriage) }
   end
 
   protected
