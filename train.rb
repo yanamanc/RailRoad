@@ -5,9 +5,18 @@ class Train
   include Valid
   include InstanceCounter
 
-  NUMBER_FORMAT = /^[a-z0-9]{3}[-]{0,1}[a-z0-9]{2}$/i.freeze
+  NUMBER_FORMAT = /^[a-z0-9]{3}-?[a-z0-9]{2}$/i.freeze
 
   @@array = []
+
+  def initialize(number)
+    @speed = 0
+    @number = number
+    @@array << self
+    @carriages = []
+    register_instance
+    validate!
+  end
 
   def self.all_instances
     @@array
@@ -65,7 +74,7 @@ class Train
   end
 
   def validate!
-    raise 'Number is not corrent' if number !~ NUMBER_FORMAT
+    raise 'Number is not correct' if number !~ NUMBER_FORMAT
 
     true
   end
