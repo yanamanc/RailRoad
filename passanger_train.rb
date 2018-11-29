@@ -1,5 +1,7 @@
 class PassangerTrain < Train
   attr_accessor :type, :speed, :number, :carriages
 
-  @type = 'passanger'
+  def set_type
+    @type = 'passanger'
+  end
 end

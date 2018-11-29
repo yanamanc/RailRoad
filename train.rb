@@ -1,6 +1,6 @@
 class Train
   attr_accessor :current_station
-  attr_reader :all_stations
+  attr_reader :stations
   include Firm
   include Valid
   include InstanceCounter
@@ -14,6 +14,8 @@ class Train
     @number = number
     @@array << self
     @carriages = []
+    @stations = []
+    set_type
     register_instance
     validate!
   end
@@ -39,7 +41,7 @@ class Train
   end
 
   def add_route(route)
-    @all_stations = route.stations
+    @stations = route.stations
     @current_station = route.stations[0].name
   end
 
@@ -48,11 +50,11 @@ class Train
   end
 
   def next_station
-    @all_stations[@all_stations.index(@current_station) + 1] if current_station?
+    @stations[@stations.index(@current_station) + 1] if current_station?
   end
 
   def previous_station
-    @all_stations[@all_stations.index(@current_station) - 1] if current_station?
+    @stations[@stations.index(@current_station) - 1] if current_station?
   end
 
   def move_to_next_station

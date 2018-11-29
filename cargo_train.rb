@@ -1,5 +1,7 @@
 class CargoTrain < Train
   attr_accessor :number, :type, :speed, :carriages
 
-  @type = 'cargo'
+  def set_type
+    @type = 'cargo'
+  end
 end
