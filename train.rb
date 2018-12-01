@@ -2,8 +2,9 @@ class Train
   attr_accessor :current_station
   attr_reader :stations
   include Firm
-  include Valid
+  include Validation
   include InstanceCounter
+  extend Accessors
 
   NUMBER_FORMAT = /^[a-z0-9]{3}-?[a-z0-9]{2}$/i.freeze
 
