@@ -6,7 +6,7 @@ module Accessors
       argument_value = "@#{argument}".to_sym
 
       define_method("#{argument}=") do |value|
-        if instance_variable_get(argument_history) == nil
+        if instance_variable_get(argument_history).nil?
           instance_variable_set(argument_history, [])
         else
           instance_variable_get(argument_history) << instance_variable_get(argument_value)
