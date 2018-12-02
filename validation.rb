@@ -4,7 +4,6 @@ module Validation
     base.extend ClassMethods
     base.send :include, InstanceMethods
   end
-  
   module ClassMethods
     attr_reader :validates
 
@@ -31,15 +30,15 @@ module Validation
     private
 
     def validate_presence(argument)
-      raise ArgumentError, 'Error' if argument == nil
+      raise ArgumentError, 'Nil argument (ERROR)' if argument.nil?
     end
 
     def validate_format(argument, format)
-      raise ArgumentError, 'Error' if argument !~ format
+      raise ArgumentError, 'Uncorrect argument format (ERROR)' if argument !~ format
     end
 
     def validate_type(argument,argument_class)
-      raise ArgumentError, 'Error' unless argument.is_a?(argument_class)
+      raise ArgumentError, 'Uncorrect argument type (ERROR)' unless argument.is_a?(argument_class)
     end
   end
 
